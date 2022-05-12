@@ -25,6 +25,15 @@ function Widget() {
         bottomSheetRef.current?.expand();
     }
 
+    function hanldleRestartFeedback() {
+        setFeedbackType(null);
+        setFeedbackSent(false);
+    }
+
+    function handleFeedbackSent() {
+        setFeedbackSent(true);
+    }
+
   return (
     <>
         <TouchableOpacity
@@ -46,12 +55,18 @@ function Widget() {
         >
             {
                 feedbackSent ? (
-                    <Success />
+                    <Success
+                        onSendAnotherFeedback={hanldleRestartFeedback}
+                    />
                 ) : (
                     <>
                         {
                             feedbackType ? (
-                                <Form feedbackType={feedbackType} />
+                                <Form 
+                                    feedbackType={feedbackType}
+                                    onFeedbackCanceled={hanldleRestartFeedback}
+                                    onFeedbackSent={handleFeedbackSent}
+                                />
                             ) : (
                                 <Options onFeedbackTypeChanged={setFeedbackType} />
                             )
@@ -59,9 +74,7 @@ function Widget() {
                     </>
                 )
             }
-            <Form
-                feedbackType='BUG'
-            />
+            
         </BottomSheet>
     </>
   );
