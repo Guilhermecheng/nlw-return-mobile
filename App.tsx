@@ -1,7 +1,7 @@
 import 'react-native-gesture-handler';
 
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View, Keyboard, TouchableWithoutFeedback } from 'react-native';
 import { useFonts, Inter_400Regular, Inter_500Medium } from '@expo-google-fonts/inter';
 import * as SplashScreen from 'expo-splash-screen';
 
@@ -21,15 +21,17 @@ export default function App() {
 
   SplashScreen.hideAsync();
   return (
-    <View style={styles.container}>
-      <StatusBar
-        style='light'
-        backgroundColor='trasnparent'
-        translucent
-      />
+    <TouchableWithoutFeedback  onPress={Keyboard.dismiss}>
+      <View style={styles.container}>
+        <StatusBar
+          style='light'
+          backgroundColor='trasnparent'
+          translucent
+        />
 
-      <Widget />
-    </View>
+        <Widget />
+      </View>
+    </TouchableWithoutFeedback>
   );
 }
 
